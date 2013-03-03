@@ -119,6 +119,7 @@ TEMPLATE_DIRS = (
     path.join(PROJECT_ROOT, 'apps/common/templates'),
     path.join(PROJECT_ROOT, 'apps/accounts/templates'),
     path.join(PROJECT_ROOT, 'apps/admin/templates'),
+    path.join(PROJECT_ROOT, 'apps/repo/templates'),
 )
 
 INSTALLED_APPS = (
@@ -134,6 +135,7 @@ INSTALLED_APPS = (
     'accounts',
     'admin',
     'common',
+    'repo',
 )
 
 MAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
