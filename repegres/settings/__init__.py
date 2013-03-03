@@ -1,23 +1,31 @@
-# Django settings for repegres project.
+from django.core.files.storage import FileSystemStorage
+from os import path
+import sys
+
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+PROJECT_ROOT = path.dirname(path.dirname(path.dirname(__file__)))
+
+sys.path.append(path.join(PROJECT_ROOT, 'apps'))
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
 ADMINS = (
-# ('Your Name', 'your_email@example.com'),
+    ('Erick Navarro', 'erickxls@gmail.com'),
 )
 
 MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
+        'ENGINE': 'django.db.backends.',
+        'NAME': '',
         'USER': '',
         'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+        'HOST': '',
+        'PORT': '',
     }
 }
 
@@ -108,9 +116,9 @@ ROOT_URLCONF = 'repegres.urls'
 WSGI_APPLICATION = 'repegres.wsgi.application'
 
 TEMPLATE_DIRS = (
-# Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-# Always use forward slashes, even on Windows.
-# Don't forget to use absolute paths, not relative paths.
+    path.join(PROJECT_ROOT, 'apps/common/templates'),
+    path.join(PROJECT_ROOT, 'apps/accounts/templates'),
+    path.join(PROJECT_ROOT, 'apps/admin/templates'),
 )
 
 INSTALLED_APPS = (
@@ -120,11 +128,27 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    'crispy_forms',
+    'south',
+    'djcelery',
+    'accounts',
+    'admin',
+    'common',
 )
+
+MAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 587
+
+DEFAULT_FROM_EMAIL = ''
+
+PACKAGE_STORAGE = FileSystemStorage(location=path.join(PROJECT_ROOT, 'media'), base_url='/')
+
+PAGE_SIZE = 5
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -154,3 +178,11 @@ LOGGING = {
             },
         }
 }
+
+import djcelery
+
+djcelery.setup_loader()
+
+BROKER_URL = ''
+
+from local_settings import *

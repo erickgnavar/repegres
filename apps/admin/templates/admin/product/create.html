@@ -1,0 +1,25 @@
+{% extends 'admin/base.html' %}
+{% load i18n %}
+{% block title %}{% trans 'Product Create' %}{% endblock title %}
+{% block extrastyle %}
+{% endblock extrastyle %}
+{% block container %}
+    {% load crispy_forms_tags %}
+    <form action="" method="post" class="form-horizontal">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">{% trans 'Save changes' %}</button>
+            <button href="/" type="button" class="btn">{% trans 'Cancel' %}</button>
+        </div>
+    </form>
+{% endblock container %}
+{% block bottom_script %}
+    <script type="text/javascript" src="{{ STATIC_URL }}admin/js/chosen.js"></script>
+    <script type="text/javascript">
+        $('#id_categories').addClass('chzn-select');
+        $('.chzn-select').chosen({
+            no_results_text: 'Categories doesn\'t found'
+        });
+    </script>
+{% endblock bottom_script %}

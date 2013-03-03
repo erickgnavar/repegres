@@ -1,0 +1,8 @@
+{% load common_tags %}
+<ul class="breadcrumb">
+    {% for path in full_path|path_to_list %}
+        <li>
+            <a href="{{ path.url }}">{{ path.name|capfirst }}</a> <span class="divider"> / </span>
+        </li>
+    {% endfor %}
+</ul>
