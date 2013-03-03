@@ -48,46 +48,75 @@ class Student(models.Model):
     code = models.CharField(
         _('Code'),
         max_length=8,
+        editable=False,
         unique=True
     )
     first_name = models.CharField(
         _('First Name'),
         max_length=200,
-        default=''
+        default='',
+        null=True
     )
     last_name = models.CharField(
         _('Last Name'),
         max_length=200,
-        default=''
+        default='',
+        null=True
     )
     address = models.CharField(
         _('Address'),
-        max_length=400
+        max_length=400,
+        null=True
     )
     phone = models.CharField(
         _('Phone'),
-        max_length=10
+        max_length=10,
+        null=True
     )
     mobile_phone = models.CharField(
         _('Mobile Phone'),
-        max_length=10
+        max_length=10,
+        null=True
     )
     email = models.EmailField(
         _('Email'),
-        max_length=100
+        max_length=100,
+        null=True
     )
     join_date = models.DateField(
-        _('Join Date')
+        _('Join Date'),
+        null=True
     )
     departure_date = models.DateField(
-        _('Departure Date')
+        _('Departure Date'),
+        null=True
     )
     graduation_date = models.DateField(
-        _('Graduation Date')
+        _('Graduation Date'),
+        null=True
     )
     languages = models.ForeignKey(
         'Language',
-        related_name='student_set'
+        related_name='student_set',
+        null=True
+    )
+
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        app_label = 'repo'
+
+
+class Tmp(models.Model):
+
+    key = models.CharField(
+        _('Key'),
+        max_length=100,
+        unique=True
+    )
+    student = models.OneToOneField(
+        'Student'
     )
 
     created = models.DateTimeField(auto_now_add=True)
