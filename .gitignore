@@ -1,0 +1,16 @@
+*.log
+*.pot
+*.pyc
+*.db
+*.TODO
+*.data.json
+local_settings.py
+.DS_Store
+media/
+local_settings.py
+.vagrant
+Vagrantfile
+.idea/
+deploy/
+logs/
+locale/
