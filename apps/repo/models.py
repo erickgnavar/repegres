@@ -45,6 +45,11 @@ class Language(models.Model):
 
 class Student(models.Model):
 
+    code = models.CharField(
+        _('Code'),
+        max_length=8,
+        unique=True
+    )
     first_name = models.CharField(
         _('First Name'),
         max_length=200,
