@@ -95,11 +95,6 @@ class Student(models.Model):
         _('Graduation Date'),
         null=True
     )
-    languages = models.ForeignKey(
-        'Language',
-        related_name='student_set',
-        null=True
-    )
 
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)

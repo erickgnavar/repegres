@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css" />
     <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-responsive.min.css" />
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/ranqhana.css" />
     <title>{% block title %}{% endblock title %}</title>
     {% block extrastyle %}{% endblock extrastyle %}
 </head>
@@ -24,7 +23,7 @@
         {% block container %}{% endblock container %}
     </div>
 </section>
-<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.9.0.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
 {% block bottom_script %}{% endblock bottom_script %}
 </body>
