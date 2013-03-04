@@ -169,5 +169,5 @@ class SaveDataView(AcademicBase, RedirectView):
         tasks.resume_email(student=self.student)
         tmp = Tmp.objects.get(key=self.key)
         tasks.resume_email.delay(student=self.student)
-        # tmp.delete()
+        tmp.delete()
         return '/'
