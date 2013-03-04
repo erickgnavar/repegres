@@ -1,0 +1,39 @@
+{% extends 'repo/base.html' %}
+{% load i18n %}
+{% block title %}{% trans 'Academic Info Jobss' %}{% endblock title %}
+{% block header %}
+    <h1>{% trans 'Academic Info | Jobs' %}</h1>
+    <a class="btn btn-success" href="{% url 'repo_job_create' key %}"><i class="icon-plus icon-white"></i> {% trans 'New Job' %}</a>
+    <a class="btn" href="{% url 'repo_language_list' key %}">{% trans 'Prev' %}</a>
+    <a class="btn btn-primary" href="#">{% trans 'Next' %}</a>
+{% endblock header %}
+{% block container %}
+    <div class="span10 offset1">
+        <div class="progress">
+            <div class="bar" style="width: 60%"></div>
+        </div>
+    </div>
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+            <th>{% trans 'Company' %}</th>
+            <th>{% trans 'Postion' %}</th>
+            <th>{% trans 'Place' %}</th>
+            <th>{% trans 'Beginning Date' %}</th>
+            <th>{% trans 'End Date' %}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for job in jobs %}
+            <tr>
+                <td>{{ job.company }}</td>
+                <td>{{ job.position }}</td>
+                <td>{{ job.place }}</td>
+                <td>{{ job.beginning_date }}</td>
+                <td>{{ job.end_date }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% include 'common/pagination.html' %}
+{% endblock container %}

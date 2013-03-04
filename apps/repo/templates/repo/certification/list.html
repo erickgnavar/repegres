@@ -1,11 +1,14 @@
 {% extends 'repo/base.html' %}
 {% load i18n %}
 {% block title %}{% trans 'Academic Info Languages' %}{% endblock title %}
+{% block extrastyle %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/smoothness/jquery-ui-1.10.0.custom.min.css" />
+{% endblock extrastyle %}
 {% block header %}
     <h1>{% trans 'Academic Info | Languages' %}</h1>
     <a class="btn btn-success" href="{% url 'repo_language_create' key %}"><i class="icon-plus icon-white"></i> {% trans 'New Language' %}</a>
     <a class="btn" href="{% url 'repo_personal_info' key %}">{% trans 'Prev' %}</a>
-    <a class="btn btn-primary" href="{% url 'repo_job_list' key %}">{% trans 'Next' %}</a>
+    <a class="btn btn-primary" href="#">{% trans 'Next' %}</a>
 {% endblock header %}
 {% block container %}
     <div class="span10 offset1">
