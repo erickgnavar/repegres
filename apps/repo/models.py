@@ -24,9 +24,12 @@ class Language(models.Model):
         (ADVANCED, 'Advanced'),
     )
 
-    name = models.CharField(
+    student = models.ForeignKey(
+        'Student',
+        related_name='language_set'
+    )
+    name = models.IntegerField(
         _('Name'),
-        max_length=20,
         choices=NAME_CHOICES,
         default=SPANISH
     )
@@ -41,6 +44,16 @@ class Language(models.Model):
 
     class Meta:
         app_label = 'repo'
+
+    def print_name(self):
+        for name in self.NAME_CHOICES:
+            if self.name == name[0]:
+                return name[1]
+
+    def print_level(self):
+        for level in self.LEVEL_CHOICES:
+            if self.level == level[0]:
+                return level[1]
 
 
 class Student(models.Model):
@@ -93,10 +106,6 @@ class Student(models.Model):
     )
     graduation_date = models.DateField(
         _('Graduation Date'),
-        null=True
-    )
-    languages = models.ManyToManyField(
-        'Language',
         null=True
     )
 
