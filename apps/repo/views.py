@@ -20,7 +20,7 @@ class HomeView(FormView):
     def form_valid(self, form):
         code = form.cleaned_data['code']
         email = code + self.email_base
-        tasks.send_email.delay(email=email, host=settings.SITE_URL)
+        tasks.signup_email.delay(email=email, host=settings.SITE_URL)
         messages.success(self.request, 'A message will be sent your email')
         return super(HomeView, self).form_valid(form)
 
@@ -161,4 +161,8 @@ class SaveDataView(AcademicBase, RedirectView):
 
     def get_redirect_url(self, key):
         messages.success(self.request, 'Data complete!')
+        tasks.resume_email(student=self.student)
+        tmp = Tmp.objects.get(key=self.key)
+        tasks.resume_email.delay(student=self.student)
+        # tmp.delete()
         return '/'

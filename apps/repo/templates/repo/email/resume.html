@@ -1,0 +1,95 @@
+{% extends 'repo/base.html' %}
+{% load i18n %}
+{% block title %}{% trans 'Resume Data' %}{% endblock title %}
+{% block container %}
+    <div class="span10 offset1">
+        <div class="progress">
+            <div class="bar" style="width: 100%"></div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <h3>{% trans 'Personal Info' %}</h3>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span2">
+            <h4>{% trans 'Code' %}</h4>
+            <p>{{ student.code }}</p>
+        </div>
+        <div class="span3">
+            <h4>{% trans 'Address' %}</h4>
+            <p>{{ student.address }}</p>
+        </div>
+        <div class="span2">
+            <h4>{% trans 'Phone' %}</h4>
+            <p>{{ student.phone }}</p>
+        </div>
+        <div class="span2">
+            <h4>{% trans 'Mobile Phone' %}</h4>
+            <p>{{ student.mobile_phone }}</p>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span3">
+            <h4>{% trans 'Email' %}</h4>
+            <p>{{ student.email }}</p>
+        </div>
+        <div class="span3">
+            <h4>{% trans 'Join Date' %}</h4>
+            <p>{{ student.join_date }}</p>
+        </div>
+        <div class="span3">
+            <h4>{% trans 'Departure Date' %}</h4>
+            <p>{{ student.departure_date }}</p>
+        </div>
+        <div class="span3">
+            <h4>{% trans 'Graduation Date' %}</h4>
+            <p>{{ student.graduation_date }}</p>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <h3>{% trans 'Languages' %}</h3>
+        </div>
+    </div>
+    <div class="row-fluid">
+        {% for lang in student.language_set.all %}
+            <div class="span3">
+                <h4>{{ lang.print_name }}</h4>
+                <p>{{ lang.print_level }}</p>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <h3>{% trans 'Jobs' %}</h3>
+        </div>
+    </div>
+    <div class="row-fluid">
+        {% for job in student.job_set.all %}
+            <div class="span3">
+                <h4>{{ job.position }}</h4>
+                <p>{{ job.company }}</p>
+                <p>{{ job.place }}</p>
+                <p><b>{% trans 'Beginning' %}: </b>{{ job.beginning_date }}</p>
+                <p><b>{% trans 'End' %}: </b>{{ job.end_date }}</p>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <h3>{% trans 'Certifications' %}</h3>
+        </div>
+    </div>
+    <div class="row-fluid">
+        {% for certification in student.certification_set.all %}
+            <div class="span3">
+                <h4>{{ certification.name }}</h4>
+                <p>{{ certification.year }}</p>
+                <p>{{ certification.institution }}</p>
+            </div>
+        {% endfor %}
+    </div>
+    <hr>
+{% endblock container %}
