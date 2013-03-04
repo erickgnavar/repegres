@@ -8,7 +8,7 @@
     <h1>{% trans 'Academic Info | Certifications' %}</h1>
     <a class="btn btn-success" href="{% url 'repo_certification_create' key %}"><i class="icon-plus icon-white"></i> {% trans 'New Certification' %}</a>
     <a class="btn" href="{% url 'repo_job_list' key %}">{% trans 'Prev' %}</a>
-    <a class="btn btn-primary" href="#">{% trans 'Next' %}</a>
+    <a class="btn btn-primary" href="{% url 'repo_confirm_data' key %}">{% trans 'Next' %}</a>
 {% endblock header %}
 {% block container %}
     <div class="span10 offset1">

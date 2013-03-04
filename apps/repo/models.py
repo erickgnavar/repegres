@@ -115,6 +115,9 @@ class Student(models.Model):
     class Meta:
         app_label = 'repo'
 
+    def get_full_name(self):
+        return '%s %s' % (self.first_name, self.last_name)
+
 
 class Tmp(models.Model):
 

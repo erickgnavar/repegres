@@ -1,5 +1,5 @@
 from django.views.generic.edit import FormView
-from django.views.generic import UpdateView, TemplateView, ListView, CreateView
+from django.views.generic import UpdateView, DetailView, ListView, CreateView, RedirectView
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from django.conf import settings
@@ -144,3 +144,21 @@ class CertificationCreateView(AcademicBase, CreateView):
 
     def get_success_url(self):
         return reverse('repo_certification_list', kwargs={'key': self.key})
+
+
+class ConfirmDataView(AcademicBase, DetailView):
+
+    template_name = 'repo/resume.html'
+    model = Student
+
+    def get_object(self, queryset=None):
+        return self.student
+
+
+class SaveDataView(AcademicBase, RedirectView):
+
+    permanent = False
+
+    def get_redirect_url(self, key):
+        messages.success(self.request, 'Data complete!')
+        return '/'
