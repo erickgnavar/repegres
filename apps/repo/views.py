@@ -6,7 +6,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django import forms
 
-from repo.forms import SignupForm, StudentForm, LanguageForm, JobForm
+from repo.forms import SignupForm, StudentForm, LanguageForm, JobForm, CertificationForm
 from repo import tasks
 from repo.models import Student, Tmp, Language, Certification, Job
 
@@ -115,3 +115,32 @@ class JobCreateView(AcademicBase, CreateView):
 
     def get_success_url(self):
         return reverse('repo_job_list', kwargs={'key': self.key})
+
+
+class CertificationListView(AcademicBase, ListView):
+
+    template_name = 'repo/certification/list.html'
+    model = Certification
+    paginate_by = settings.PAGE_SIZE
+    context_object_name = 'certifications'
+
+    def get_queryset(self):
+        qs = super(CertificationListView, self).get_queryset()
+        qs = qs.filter(student=self.student)
+        return qs
+
+
+class CertificationCreateView(AcademicBase, CreateView):
+
+    template_name = 'repo/certification/create.html'
+    model = Certification
+    form_class = CertificationForm
+
+    def get_form(self, form_class):
+        form = super(CertificationCreateView, self).get_form(form_class)
+        form.fields['student'].initial = self.student
+        form.fields['student'].widget = forms.HiddenInput()
+        return form
+
+    def get_success_url(self):
+        return reverse('repo_certification_list', kwargs={'key': self.key})

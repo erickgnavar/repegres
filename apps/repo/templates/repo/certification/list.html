@@ -1,33 +1,35 @@
 {% extends 'repo/base.html' %}
 {% load i18n %}
-{% block title %}{% trans 'Academic Info Languages' %}{% endblock title %}
+{% block title %}{% trans 'Academic Info Certifications' %}{% endblock title %}
 {% block extrastyle %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/smoothness/jquery-ui-1.10.0.custom.min.css" />
 {% endblock extrastyle %}
 {% block header %}
-    <h1>{% trans 'Academic Info | Languages' %}</h1>
-    <a class="btn btn-success" href="{% url 'repo_language_create' key %}"><i class="icon-plus icon-white"></i> {% trans 'New Language' %}</a>
-    <a class="btn" href="{% url 'repo_personal_info' key %}">{% trans 'Prev' %}</a>
+    <h1>{% trans 'Academic Info | Certifications' %}</h1>
+    <a class="btn btn-success" href="{% url 'repo_certification_create' key %}"><i class="icon-plus icon-white"></i> {% trans 'New Certification' %}</a>
+    <a class="btn" href="{% url 'repo_job_list' key %}">{% trans 'Prev' %}</a>
     <a class="btn btn-primary" href="#">{% trans 'Next' %}</a>
 {% endblock header %}
 {% block container %}
     <div class="span10 offset1">
         <div class="progress">
-            <div class="bar" style="width: 60%"></div>
+            <div class="bar" style="width: 85%"></div>
         </div>
     </div>
     <table class="table table-bordered table-striped table-hover">
         <thead>
         <tr>
-            <th>{% trans 'Language' %}</th>
-            <th>{% trans 'level' %}</th>
+            <th>{% trans 'Name' %}</th>
+            <th>{% trans 'Year' %}</th>
+            <th>{% trans 'Institution' %}</th>
         </tr>
         </thead>
         <tbody>
-        {% for lang in languages %}
+        {% for certification in certifications %}
             <tr>
-                <td>{{ lang.print_name }}</td>
-                <td>{{ lang.print_level }}</td>
+                <td>{{ certification.name }}</td>
+                <td>{{ certification.year }}</td>
+                <td>{{ certification.institution }}</td>
             </tr>
         {% endfor %}
         </tbody>

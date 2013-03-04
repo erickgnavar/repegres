@@ -5,12 +5,12 @@
     <h1>{% trans 'Academic Info | Jobs' %}</h1>
     <a class="btn btn-success" href="{% url 'repo_job_create' key %}"><i class="icon-plus icon-white"></i> {% trans 'New Job' %}</a>
     <a class="btn" href="{% url 'repo_language_list' key %}">{% trans 'Prev' %}</a>
-    <a class="btn btn-primary" href="#">{% trans 'Next' %}</a>
+    <a class="btn btn-primary" href="{% url 'repo_certification_list' key %}">{% trans 'Next' %}</a>
 {% endblock header %}
 {% block container %}
     <div class="span10 offset1">
         <div class="progress">
-            <div class="bar" style="width: 60%"></div>
+            <div class="bar" style="width: 70%"></div>
         </div>
     </div>
     <table class="table table-bordered table-striped table-hover">

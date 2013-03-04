@@ -10,7 +10,7 @@
 {% block container %}
     <div class="span10 offset1">
         <div class="progress">
-            <div class="bar" style="width: 60%"></div>
+            <div class="bar" style="width: 85%"></div>
         </div>
     </div>
     {% load crispy_forms_tags %}
@@ -19,7 +19,7 @@
         {{ form|crispy }}
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">{% trans 'Save' %}</button>
-            <a class="btn" href="{% url 'repo_language_list' key %}">{% trans 'Cancel' %}</a>
+            <a class="btn" href="{% url 'repo_certification_list' key %}">{% trans 'Cancel' %}</a>
         </div>
     </form>
 {% endblock container %}
