@@ -123,3 +123,60 @@ class Tmp(models.Model):
 
     class Meta:
         app_label = 'repo'
+
+
+class Job(models.Model):
+
+    student = models.ForeignKey(
+        'Student',
+        related_name='job_set'
+    )
+    company = models.CharField(
+        _('Company'),
+        max_length=100
+    )
+    position = models.CharField(
+        _('Position'),
+        max_length=100
+    )
+    place = models.CharField(
+        _('Place'),
+        max_length=100
+    )
+    beginning_date = models.DateField(
+        _('Beginning')
+    )
+    end_date = models.DateField(
+        _('End')
+    )
+
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        app_label = 'repo'
+
+
+class Certification(models.Model):
+
+    student = models.ForeignKey(
+        'Student',
+        related_name='certification_set'
+    )
+    name = models.CharField(
+        _('Name'),
+        max_length=100
+    )
+    year = models.IntegerField(
+        _('Year')
+    )
+    institution = models.CharField(
+        _('Institution'),
+        max_length=100
+    )
+
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        app_label = 'repo'

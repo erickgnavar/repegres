@@ -1,6 +1,6 @@
 from django import forms
 
-from repo.models import Student
+from repo.models import Student, Job, Language, Certification
 
 
 class SignupForm(forms.Form):
@@ -31,3 +31,26 @@ class StudentForm(forms.ModelForm):
         self.fields['join_date'].widget.attrs['class'] = 'datepicker'
         self.fields['departure_date'].widget.attrs['class'] = 'datepicker'
         self.fields['graduation_date'].widget.attrs['class'] = 'datepicker'
+
+
+class JobForm(forms.ModelForm):
+
+    class Meta:
+        model = Job
+
+    def __init__(self, *args, **kwargs):
+        super(JobForm, self).__init__(*args, **kwargs)
+        self.fields['beginning_date'].widget.attrs['class'] = 'datepicker'
+        self.fields['end_date'].widget.attrs['class'] = 'datepicker'
+
+
+class LanguageForm(forms.ModelForm):
+
+    class Meta:
+        model = Language
+
+
+class CertificationForm(forms.ModelForm):
+
+    class Meta:
+        model = Certification
