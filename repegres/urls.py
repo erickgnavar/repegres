@@ -1,5 +1,7 @@
 from django.conf.urls import patterns, include, url
 
+handler404 = 'repo.views.handler_404'
+
 
 urlpatterns = patterns('',
     url(r'^', include('accounts.urls')),

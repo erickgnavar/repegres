@@ -1,7 +1,7 @@
 from django.views.generic.edit import FormView
 from django.views.generic import UpdateView, DetailView, ListView, CreateView, RedirectView
 from django.contrib import messages
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render_to_response
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django import forms
@@ -9,6 +9,11 @@ from django import forms
 from repo.forms import SignupForm, StudentForm, LanguageForm, JobForm, CertificationForm
 from repo import tasks
 from repo.models import Student, Tmp, Language, Certification, Job
+
+
+def handler_404(request):
+    print '404'
+    return render_to_response('repo/404.html')
 
 
 class HomeView(FormView):
