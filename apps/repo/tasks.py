@@ -27,4 +27,5 @@ def send_email(*args, **kwargs):
         'subject': 'Register Successfully',
         'to': [kwargs['email']]
     }
+    print 'email sent to %s' % kwargs['email']
     Email.send_email(**data_email)

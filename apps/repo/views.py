@@ -1,13 +1,14 @@
 from django.views.generic.edit import FormView
-from django.views.generic import UpdateView, TemplateView
+from django.views.generic import UpdateView, TemplateView, ListView, CreateView
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django import forms
 
-from repo.forms import SignupForm, StudentForm
+from repo.forms import SignupForm, StudentForm, LanguageForm
 from repo import tasks
-from repo.models import Student, Tmp
+from repo.models import Student, Tmp, Language, Certification
 
 
 class HomeView(FormView):
@@ -39,14 +40,49 @@ class PersonalInfoView(UpdateView):
         return tmp.student
 
     def get_success_url(self):
-        return reverse('repo_academic_info', kwargs={'key': self.kwargs['key']})
+        return reverse('repo_language_list', kwargs={'key': self.kwargs['key']})
 
 
-class AcademicInfoView(TemplateView):
+class AcademicBase(object):
 
-    template_name = 'repo/academic_info.html'
+    def dispatch(self, request, *args, **kwargs):
+        key = self.kwargs['key']
+        tmp = get_object_or_404(Tmp, key=key)
+        self.student = tmp.student
+        self.key = key
+        return super(AcademicBase, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(AcademicInfoView, self).get_context_data(**kwargs)
-        context['key'] = self.kwargs['key']
+        context = super(AcademicBase, self).get_context_data(**kwargs)
+        context['student'] = self.student
+        context['key'] = self.key
         return context
+
+
+class LanguageListView(AcademicBase, ListView):
+
+    template_name = 'repo/language/list.html'
+    model = Language
+    paginate_by = settings.PAGE_SIZE
+    context_object_name = 'languages'
+
+    def get_queryset(self):
+        qs = super(LanguageListView, self).get_queryset()
+        qs = qs.filter(student=self.student)
+        return qs
+
+
+class LanguageCreateView(AcademicBase, CreateView):
+
+    template_name = 'repo/language/create.html'
+    model = Language
+    form_class = LanguageForm
+
+    def get_form(self, form_class):
+        form = super(LanguageCreateView, self).get_form(form_class)
+        form.fields['student'].initial = self.student
+        form.fields['student'].widget = forms.HiddenInput()
+        return form
+
+    def get_success_url(self):
+        return reverse('repo_language_list', kwargs={'key': self.key})

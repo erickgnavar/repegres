@@ -1,6 +1,9 @@
 {% extends 'repo/base.html' %}
 {% load i18n %}
 {% block title %}Register{% endblock title %}
+{% block header %}
+    <h1>{% trans 'Register' %}</h1>
+{% endblock header %}
 {% block container %}
     {% load crispy_forms_tags %}
     <form action="" method="post" class="form-horizontal">

@@ -17,7 +17,7 @@
     <br>
     <div class="container-fluid">
         <div class="page-header">
-            <h1>{% block header %}{% endblock header %}</h1>
+            {% block header %}{% endblock header %}
         </div>
         <div class="row-fluid">
             {% include 'common/messages.html' %}

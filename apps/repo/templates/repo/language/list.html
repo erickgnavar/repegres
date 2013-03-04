@@ -1,0 +1,36 @@
+{% extends 'repo/base.html' %}
+{% load i18n %}
+{% block title %}{% trans 'Academic Info Languages' %}{% endblock title %}
+{% block extrastyle %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/smoothness/jquery-ui-1.10.0.custom.min.css" />
+{% endblock extrastyle %}
+{% block header %}
+    <h1>{% trans 'Academic Info | Languages' %}</h1>
+    <a class="btn btn-success" href="{% url 'repo_language_create' key %}"><i class="icon-plus icon-white"></i> {% trans 'New Language' %}</a>
+    <a class="btn" href="{% url 'repo_personal_info' key %}">{% trans 'Prev' %}</a>
+    <a class="btn btn-primary" href="#">{% trans 'Next' %}</a>
+{% endblock header %}
+{% block container %}
+    <div class="span10 offset1">
+        <div class="progress">
+            <div class="bar" style="width: 60%"></div>
+        </div>
+    </div>
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+            <th>{% trans 'Language' %}</th>
+            <th>{% trans 'level' %}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for lang in languages %}
+            <tr>
+                <td>{{ lang.print_name }}</td>
+                <td>{{ lang.print_level }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% include 'common/pagination.html' %}
+{% endblock container %}

@@ -1,16 +1,16 @@
 {% extends 'repo/base.html' %}
 {% load i18n %}
-{% block title %}{% trans 'Personal Info' %}{% endblock title %}
+{% block title %}{% trans 'Academic Info Language Create' %}{% endblock title %}
 {% block extrastyle %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/smoothness/jquery-ui-1.10.0.custom.min.css" />
 {% endblock extrastyle %}
 {% block header %}
-    <h1>{% trans 'Personal Info' %}</h1>
+    <h1>{% trans 'Academic Info | Language Create' %}</h1>
 {% endblock header %}
 {% block container %}
     <div class="span10 offset1">
         <div class="progress">
-            <div class="bar" style="width: 40%"></div>
+            <div class="bar" style="width: 60%"></div>
         </div>
     </div>
     {% load crispy_forms_tags %}
@@ -18,15 +18,8 @@
         {% csrf_token %}
         {{ form|crispy }}
         <div class="form-actions">
-            <button type="submit" class="btn btn-primary">{% trans 'Next' %}</button>
+            <button type="submit" class="btn btn-primary">{% trans 'Save' %}</button>
+            <a class="btn" href="{% url 'repo_language_list' key %}">{% trans 'Cancel' %}</a>
         </div>
     </form>
 {% endblock container %}
-{% block bottom_script %}
-    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-1.10.0.custom.min.js"></script>
-    <script type="text/javascript">
-        $('.datepicker').datepicker({
-            changeYear: true
-        });
-    </script>
-{% endblock bottom_script %}
