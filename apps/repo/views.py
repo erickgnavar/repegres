@@ -45,3 +45,8 @@ class PersonalInfoView(UpdateView):
 class AcademicInfoView(TemplateView):
 
     template_name = 'repo/academic_info.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(AcademicInfoView, self).get_context_data(**kwargs)
+        context['key'] = self.kwargs['key']
+        return context

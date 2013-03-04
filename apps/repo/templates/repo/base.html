@@ -11,18 +11,16 @@
 <body>
 <div class="navbar navbar-static-top">
     <div class="navbar-inner">
-        <a href="/admin/" class="brand">Repegres</a>
+        <a href="/" class="brand">Repegres</a>
     </div>
 </div>
-<section class="container">
     <br>
-    <div class="row">
+    <div class="row-fluid">
         {% include 'common/messages.html' %}
     </div>
-    <div class="row">
+    <div class="row-fluid">
         {% block container %}{% endblock container %}
     </div>
-</section>
 <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.9.0.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
 {% block bottom_script %}{% endblock bottom_script %}

@@ -24,6 +24,7 @@ class StudentForm(forms.ModelForm):
 
     class Meta:
         model = Student
+        exclude = ('languages', )
 
     def __init__(self, *args, **kwargs):
         super(StudentForm, self).__init__(*args, **kwargs)

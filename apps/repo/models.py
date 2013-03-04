@@ -95,6 +95,10 @@ class Student(models.Model):
         _('Graduation Date'),
         null=True
     )
+    languages = models.ManyToManyField(
+        'Language',
+        null=True
+    )
 
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
