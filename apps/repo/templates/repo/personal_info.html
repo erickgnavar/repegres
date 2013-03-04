@@ -4,7 +4,13 @@
 {% block extrastyle %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/smoothness/jquery-ui-1.10.0.custom.min.css" />
 {% endblock extrastyle %}
+{% block header %}{% trans 'Personal Info' %}{% endblock header %}
 {% block container %}
+    <div class="span10 offset1">
+        <div class="progress">
+            <div class="bar" style="width: 40%"></div>
+        </div>
+    </div>
     {% load crispy_forms_tags %}
     <form action="" method="post" class="form-horizontal">
         {% csrf_token %}
