@@ -1,0 +1,37 @@
+{% extends 'admin/base.html' %}
+{% load i18n %}
+{% block title %}{% trans 'Student List' %}{% endblock title %}
+{% block container %}
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>{% trans 'Code' %}</th>
+                <th>{% trans 'Name' %}</th>
+                <th>{% trans 'Address' %}</th>
+                <th>{% trans 'Phone' %}</th>
+                <th>{% trans 'Mobile Phone' %}</th>
+                <th>{% trans 'Email' %}</th>
+                <th>{% trans 'Options' %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.code }}</td>
+                <td>{{ student.get_full_name }}</td>
+                <td>{{ student.address }}</td>
+                <td>{{ student.phone }}</td>
+                <td>{{ student.mobile_phone }}</td>
+                <td>{{ student.email }}</td>
+                <td>
+                    <a href="{% url 'admin_student_edit' student.id %}">{% trans 'Edit' %}</a> |
+                    <a href="{% url 'admin_language_list' student.id %}">{% trans 'Languages' %}</a> |
+                    <a href="{% url 'admin_job_list' student.id %}">{% trans 'Jobs' %}</a> |
+                    <a href="{% url 'admin_certification_list' student.id %}">{% trans 'Certifications' %}</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% include 'common/pagination.html' %}
+{% endblock container %}

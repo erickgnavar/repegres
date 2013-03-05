@@ -1,0 +1,28 @@
+{% extends 'admin/base.html' %}
+{% load i18n %}
+{% block title %}{% trans 'Job List' %}{% endblock title %}
+{% block container %}
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>{% trans 'Company' %}</th>
+                <th>{% trans 'Position' %}</th>
+                <th>{% trans 'Place' %}</th>
+                <th>{% trans 'Beginning Date' %}</th>
+                <th>{% trans 'End Date' %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for job in jobs %}
+            <tr>
+                <td>{{ job.company }}</td>
+                <td>{{ job.position }}</td>
+                <td>{{ job.place }}</td>
+                <td>{{ job.beginning_date }}</td>
+                <td>{{ job.end_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% include 'common/pagination.html' %}
+{% endblock container %}

@@ -1,0 +1,22 @@
+{% extends 'admin/base.html' %}
+{% load i18n %}
+{% block title %}{% trans 'Language List' %}{% endblock title %}
+{% block container %}
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>{% trans 'Name' %}</th>
+                <th>{% trans 'Level' %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for lang in languages %}
+            <tr>
+                <td>{{ lang.print_name }}</td>
+                <td>{{ lang.print_level }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% include 'common/pagination.html' %}
+{% endblock container %}

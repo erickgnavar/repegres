@@ -1,0 +1,24 @@
+{% extends 'admin/base.html' %}
+{% load i18n %}
+{% block title %}{% trans 'Job List' %}{% endblock title %}
+{% block container %}
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>{% trans 'Name' %}</th>
+                <th>{% trans 'Year' %}</th>
+                <th>{% trans 'Institution' %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for certification in certifications %}
+            <tr>
+                <td>{{ certification.name }}</td>
+                <td>{{ certification.year }}</td>
+                <td>{{ certification.institution }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% include 'common/pagination.html' %}
+{% endblock container %}
