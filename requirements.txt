@@ -13,3 +13,4 @@ kombu==2.5.6
 python-dateutil==1.5
 pytz==2012j
 wsgiref==0.1.2
+linkedin==0.1.5
