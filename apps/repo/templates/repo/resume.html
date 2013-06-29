@@ -5,6 +5,7 @@
     <h1>{% trans 'Resume' %}: {{ student.get_full_name }}</h1>
     <a href="{% url 'repo_save_data' key %}" class="btn btn-primary">{% trans 'Save' %}</a>
     <a class="btn" href="{% url 'repo_certification_list' key %}">{% trans 'Prev' %}</a>
+    <a class="btn btn-warning {% if student.linkedin_token %} disabled {% endif %}" href="{% url 'repo_linkedin_request' %}">{% trans 'Grant access to linkedin' %}</a>
 {% endblock header %}
 {% block container %}
     <div class="span10 offset1">

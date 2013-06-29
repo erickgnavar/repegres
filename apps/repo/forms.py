@@ -24,6 +24,7 @@ class StudentForm(forms.ModelForm):
 
     class Meta:
         model = Student
+        exclude = ('linkedin_token', 'linkedin_token_secret')
 
     def __init__(self, *args, **kwargs):
         super(StudentForm, self).__init__(*args, **kwargs)
@@ -36,6 +37,7 @@ class JobForm(forms.ModelForm):
 
     class Meta:
         model = Job
+        exclude = ('student',)
 
     def __init__(self, *args, **kwargs):
         super(JobForm, self).__init__(*args, **kwargs)
@@ -47,9 +49,11 @@ class LanguageForm(forms.ModelForm):
 
     class Meta:
         model = Language
+        exclude = ('student',)
 
 
 class CertificationForm(forms.ModelForm):
 
     class Meta:
         model = Certification
+        exclude = ('student',)

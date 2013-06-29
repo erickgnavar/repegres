@@ -108,6 +108,14 @@ class Student(models.Model):
         _('Graduation Date'),
         null=True
     )
+    linkedin_token = models.CharField(
+        max_length=100,
+        null=True
+    )
+    linkedin_token_secret = models.CharField(
+        max_length=100,
+        null=True
+    )
 
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)

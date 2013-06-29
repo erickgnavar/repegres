@@ -20,6 +20,7 @@ class StudentBase(object):
         context['student'] = self.student
         return context
 
+
 class StudentListView(LoginRequiredMixin, ListView):
 
     model = Student

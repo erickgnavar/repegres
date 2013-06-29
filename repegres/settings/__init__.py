@@ -192,6 +192,9 @@ LOGGING = {
         }
 }
 
+API_KEY = 'j333kkbrimaf'
+API_SECRET = 'FAhVoAUJJ0ok3gjq'
+
 import djcelery
 
 djcelery.setup_loader()

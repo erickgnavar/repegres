@@ -1,6 +1,7 @@
 from uuid import uuid4
 
 from celery.task import task
+from django.core.urlresolvers import reverse
 
 from common.mail import Email
 from repo.models import Student, Tmp
@@ -27,6 +28,7 @@ def signup_email(*args, **kwargs):
         'subject': 'Register Successfully',
         'to': [kwargs['email']]
     }
+    print reverse('repo_personal_info', kwargs={'key': tmp.key})
     print 'email sent to %s' % kwargs['email']
     Email.send_email(**data_email)
 
