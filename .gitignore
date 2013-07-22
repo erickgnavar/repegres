@@ -13,4 +13,4 @@ Vagrantfile
 .idea/
 deploy/
 logs/
-locale/
+django.mo
