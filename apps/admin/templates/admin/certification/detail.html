@@ -1,0 +1,64 @@
+{% extends 'admin/base.html' %}
+{% load i18n %}
+{% block title %}{{ product.name }}{% trans 'Detail' %}{% endblock title %}
+{% block extrastyle %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}admin/css/jquery.fancybox.css">
+{% endblock extrastyle %}
+{% block container %}
+    <h1>{{ product.name }}</h1>
+    <p>{{ product.description }}</p>
+    <p>{{ product.price }}</p>
+    <ul>
+    {% for category in product.categories.all %}
+        <li>
+            {{ category.name }}
+        </li>
+    {% endfor %}
+
+    </ul>
+    <ul class="thumbnails">
+    {% for product_photo in product.photo_set.all %}
+        <li class="span3">
+            <a class="thumbnail fancybox" rel="group" href="{{ MEDIA_URL }}{{ product_photo.photo }}">
+                <img src="{{ MEDIA_URL }}{{ product_photo.thumbnail }}" alt="">
+            </a>
+            {% if product_photo.is_principal %}
+                <input type="radio" name="principal" data-pk="{{ product_photo.id }}" checked="checked">
+            {% else %}
+                <input type="radio" name="principal" data-pk="{{ product_photo.id }}">
+            {% endif %}
+            {% trans 'Principal' %}
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock container %}
+{% block bottom_script %}
+    <script type="text/javascript" src="{{ STATIC_URL }}admin/js/csrf.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}admin/js/jquery.fancybox.pack.js"></script>
+    <script type="text/javascript">
+        $(document).on('ready', function () {
+            var url = '{% url 'admin_product_photo_set_principal' %}';
+            $('.fancybox').fancybox();
+            $('input[type=radio]').on('change', function () {
+                var $this = $(this);
+                var pk = $this.data('pk');
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        'product_photo_pk': pk
+                    },
+                    success: function (data) {
+                        if (data.status === 'OK') {
+                            $this.attr('checked', 'checked');
+                        }
+                    },
+                    error: function (xhr) {
+                        console.error(xhr);
+                    }
+                })
+            });
+        })
+    </script>
+{% endblock bottom_script %}
